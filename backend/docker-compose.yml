@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: ankane/pgvector:v0.5.0
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: genaichat
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data_genai:/var/lib/postgresql/data/
+      - ./database/postgres/docker-entrypoint-initdb:/docker-entrypoint-initdb.d/
+
+  opensearch:
+    image: opensearchproject/opensearch:1.0.1
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+    ports:
+      - "127.0.0.1:9200:9200"
+      - "127.0.0.1:9600:9600"
+    volumes:
+      - opensearch_data_genai:/usr/share/opensearch/data
+
+
+volumes:
+  postgres_data_genai:
+  opensearch_data_genai:

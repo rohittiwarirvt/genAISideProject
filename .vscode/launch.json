@@ -1,0 +1,32 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Start Backend Server",
+      "type": "debugpy",
+      "request": "launch",
+      "justMyCode":false,
+      "cwd": "${workspaceFolder}/backend",
+      "program": "${workspaceFolder}/backend/app/restserver.py",
+      "console": "integratedTerminal",
+      "env": {
+        "OPEN_API_KEY":""
+      }
+    },
+    {
+      "name": "Python Debugger: Chat App",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/backend",
+      // "module": "${env:HOME}/.local/bin/poetry",
+      "program": "${workspaceFolder}/backend/scripts/chat.py",
+      "console": "integratedTerminal",
+      "env": {
+        "OPENAI_API_KEY":""
+      }
+    },
+  ]
+}

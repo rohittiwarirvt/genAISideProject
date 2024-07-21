@@ -1,0 +1,8 @@
+.env
+.venv
+manuals
+resumes
+dist
+__pycache__/
+volume/
+storage/
