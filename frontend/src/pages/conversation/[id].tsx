@@ -89,6 +89,7 @@ export default function Conversation() {
     setUserMessage("")
 
      let llmConversationPath =""
+     console.log(ISLLMMOCKED)
      if (ISLLMMOCKED =="true") {
       llmConversationPath = "mockllm-message"
      } else{

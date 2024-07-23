@@ -14,19 +14,6 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-// const MyApp: AppType = ({ Component, pageProps }): AppPropsWithLayout => {
-
-//   const getLayout = Component.getLayout ?? ((page) => page)
-
-//   return getLayout(<Component {...pageProps} />)
-//   return (
-//     <div className={GeistSans.className }>
-//       <Layout>
-//         <Component {...pageProps} />
-//       </Layout>
-//     </div>
-//   );
-// };
 
  function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   // Use the layout defined at the page level, if available

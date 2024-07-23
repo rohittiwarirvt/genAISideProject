@@ -17,8 +17,6 @@ class Settings(BaseSettings):
   LOADER_IO_VERIFICATION_STR: str = "loaderio-e51043c635e0f4656473d3570ae5d9ec"
   ENVIRONMENT: str
   SHOULD_ENVIRONMENT_RELOAD: bool
-  OPENSEARCH_ENDPOINT: AnyHttpUrl
-  OPENSEARCH_INDEX: str
   VERBOSE: bool
 
   @validator("DATABASE_URL", pre=True)

@@ -28,6 +28,7 @@ const config = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  output: "standalone"
 };
 
 export default config;

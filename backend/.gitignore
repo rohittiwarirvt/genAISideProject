@@ -1,6 +1,5 @@
 .env
 .venv
-manuals
 resumes
 dist
 __pycache__/

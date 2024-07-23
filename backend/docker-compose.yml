@@ -1,7 +1,11 @@
-version: '3'
+# docker-compose.yml
+
+version: "3.9"
 services:
-  db:
+  genaipg:
     image: ankane/pgvector:v0.5.0
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
@@ -9,21 +13,19 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
     volumes:
-      - postgres_data_genai:/var/lib/postgresql/data/
+      - postgres_data_genai_deploy:/var/lib/postgresql/data/
       - ./database/postgres/docker-entrypoint-initdb:/docker-entrypoint-initdb.d/
-
-  opensearch:
-    image: opensearchproject/opensearch:1.0.1
-    environment:
-      - discovery.type=single-node
-      - plugins.security.disabled=true
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_GENAIBACKEND: "http://localhost:8000"
+    working_dir: /app
     ports:
-      - "127.0.0.1:9200:9200"
-      - "127.0.0.1:9600:9600"
-    volumes:
-      - opensearch_data_genai:/usr/share/opensearch/data
-
-
+      - "3000:3000"
+    image: fastgenai
+    env_file:
+     - .env
 volumes:
-  postgres_data_genai:
-  opensearch_data_genai:
+  postgres_data_genai_deploy :

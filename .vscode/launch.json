@@ -12,21 +12,48 @@
       "cwd": "${workspaceFolder}/backend",
       "program": "${workspaceFolder}/backend/app/restserver.py",
       "console": "integratedTerminal",
-      "env": {
-        "OPEN_API_KEY":""
-      }
+      // "env": {
+      //   "OPENAI_API_KEY":""
+      // }
+    },
+    {
+      "name": "Seed Database",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/backend",
+      "module": "${env:HOME}/.local/bin/poetry",
+      // "program": "${workspaceFolder}/backend/scripts/download_sec_pdf.py",
+      "env": {"PYTHONPATH":"${workspaceFolder};${env:PYTHONPATH}"},
+      "console": "integratedTerminal",
+      "args": ["run","python", "-m","${workspaceFolder}/backend/scripts/vector_schema_init.py"]
     },
     {
       "name": "Python Debugger: Chat App",
       "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}/backend",
+      "justMyCode":false,
       // "module": "${env:HOME}/.local/bin/poetry",
-      "program": "${workspaceFolder}/backend/scripts/chat.py",
+      "program": "${workspaceFolder}/backend/scripts/chat2.py",
       "console": "integratedTerminal",
       "env": {
         "OPENAI_API_KEY":""
       }
     },
+    {
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/frontend",
+      "request": "launch",
+      "command": "npm run dev"
+    },
+    {
+      "name": "Next.js: debug client-side",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000"
+    },
+
+
   ]
 }
