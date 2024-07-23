@@ -47,3 +47,4 @@ query_engine = index.as_query_engine()
 res = query_engine.query("How many years of experienc Urmila Manjarikar has and Top 5 Skill of Her?")
 res.response
 print(res.response)
+

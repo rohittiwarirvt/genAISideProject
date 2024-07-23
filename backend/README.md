@@ -63,3 +63,8 @@ poetry install
 poetry run start
 
 sudo lsof -t -i tcp:8000 | xargs kill -9
+
+source .env
+
+poetry run python -m scripts.vector_schema_init.py
+poetry run python -m scripts.seed_vectorindex

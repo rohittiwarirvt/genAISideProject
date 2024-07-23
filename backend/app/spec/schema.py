@@ -9,6 +9,8 @@ from uuid import UUID
 
 from app.models.db import MessageRoleEnum, MessageStatusEnum
 
+class StreamedMessage(BaseModel):
+  content: str
 
 class Base(BaseModel):
   id: Optional[UUID] = Field(None, description="Unique identifier")

@@ -1,8 +1,8 @@
 
 import os
 from pydantic_settings import BaseSettings
-from pydantic import EmailStr, validator
-
+from pydantic import EmailStr, validator, AnyHttpUrl
+from typing import List
 
 class Settings(BaseSettings):
   DATABASE_URL: str
@@ -11,12 +11,15 @@ class Settings(BaseSettings):
 
   PROJECT_NAME: str
   S3_ASSET_BUCKET_NAME: str
-
-  VECTOR_STORE_INDEX_NAME: str = "opensearch_vector_store"
-  OPEN_API_KEY: str
+  BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+  VECTOR_STORE_TABLE_NAME: str
+  OPENAI_API_KEY: str
   LOADER_IO_VERIFICATION_STR: str = "loaderio-e51043c635e0f4656473d3570ae5d9ec"
   ENVIRONMENT: str
   SHOULD_ENVIRONMENT_RELOAD: bool
+  OPENSEARCH_ENDPOINT: AnyHttpUrl
+  OPENSEARCH_INDEX: str
+  VERBOSE: bool
 
   @validator("DATABASE_URL", pre=True)
   def assemble_db_url(cls, value: str):
@@ -38,4 +41,4 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-os.environ["OPEN_API_KEY"] = settings.OPEN_API_KEY
+os.environ["OPENAI_API_KEY"] = settings.OPENAI_API_KEY
