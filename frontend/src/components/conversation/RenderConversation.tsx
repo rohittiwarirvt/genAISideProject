@@ -18,13 +18,13 @@ export const RenderConversations: React.FC<IRenderConversation> = ({
   const lastElementRef = useRef<HTMLDivElement | null>(null)
   useEffect(() =>{
   if (lastElementRef.current) {
-    lastElementRef.current.scrollIntoView()
+    // lastElementRef.current.scrollIntoView()
   }
   },[messages])
 
   const showLoading = messages[messages.length -1]?.role === ROLE.USER;
   return (
-    <div className="box-border flex h-full flex-col justify-start font-nunito text-sm text-[#2B3175]">
+    <div className="box-border flex  flex-col justify-start  text-sm text-[#2B3175]">
       {messages.map( (message, index) => {
         let display
         if (message.role == ROLE.ASSISTANT) {

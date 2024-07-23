@@ -1,16 +1,18 @@
 
 
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, ReactElement } from "react";
 import type { ChangeEvent } from "react";
 import { BsArrowUpCircle } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
-
+import Layout from "@/components/layouts/Layout"
+import ConversationLayout from "@/components/layouts/ConversationLayout"
 import  useMessages  from "@/hooks/useMessages"
 import { RenderConversations } from "@/components/conversation/RenderConversation";
+import { GeistSans } from "geist/font/sans";
 
 import { conversationClient } from "@/lib/restClientConversation"
-import { BACKENDURL } from "@/consts/const";
+import { BACKENDURL, ISLLMMOCKED } from "@/consts/const";
 import { Message, MESSAGE_STATUS } from "@/types/conversation"
 
 export default function Conversation() {
@@ -68,7 +70,6 @@ export default function Conversation() {
 
       try {
         if (conversationID) {
-          debugger
           fetchConversation(conversationID)
         }
       } catch (error) {
@@ -87,14 +88,19 @@ export default function Conversation() {
     userSendMessage(userMessage)
     setUserMessage("")
 
+     let llmConversationPath =""
+     if (ISLLMMOCKED =="true") {
+      llmConversationPath = "mockllm-message"
+     } else{
+      llmConversationPath = "message"
+     }
     // const messageEndpoint  =   `/api/conversation/${conversationID}/message`
-    const messageEndpoint  =   `/api/conversation/${conversationID}/mockllm-message`
+    const messageEndpoint  =   `/api/conversation/${conversationID}/${llmConversationPath}`
     const url = BACKENDURL + messageEndpoint +`?user_message=${encodeURI(userMessage)}`
-    debugger
+    console.log("URL---> " + url)
     const events = new EventSource(url)
 
     events.onmessage = (event : MessageEvent) =>{
-      debugger
       const parsedData: Message = JSON.parse(event.data)
       systemSendMessage(parsedData);
 
@@ -105,6 +111,21 @@ export default function Conversation() {
         }
     }
    }
+
+   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        if (!isMessagePending) {
+          submit();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [submit]);
 
   return (
     <div className="flex h-[100vh] w-full items-center bjustify-center bg-slate-200">
@@ -120,7 +141,7 @@ export default function Conversation() {
                 }}
                 className="ml-4 flex items-center justify-center rounded px-2 font-light text-[#9EA2B0] hover:text-gray-90"
               >
-                <BiArrowBack className="mr-1" /> Back to Document Selection
+                <BiArrowBack className="mr-1" /> Back to start Conversation
               </button>
 
             </div>
@@ -152,5 +173,14 @@ export default function Conversation() {
 
       </div>
     </div>
+  )
+}
+
+
+Conversation.getLayout = function getLayout(page:ReactElement)  {
+  return (
+    <Layout>
+      <ConversationLayout>{page}</ConversationLayout>
+    </Layout>
   )
 }

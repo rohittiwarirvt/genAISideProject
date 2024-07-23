@@ -7,6 +7,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        lora: ["Lora", "serif"], // The second font is a fallback.
+        nunito: ["Nunito Sans", "sans-serif"], // The second font is a fallback.
       },
     },
   },

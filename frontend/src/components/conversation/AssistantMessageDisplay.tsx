@@ -29,7 +29,7 @@ const AssistantMessageDisplay: React.FC<AssistantMessageDisplayProps> = ({messag
             <div className="flex ">
               <div className="w-1/5"></div>
               <div className="w-4/5">
-                <p className="relative mb-2 mt-2 pr-3 font-nunito whitespace-pre-wrap font-bold text-gray-90">
+                <p className="relative mb-2 mt-2 pr-3  whitespace-pre-wrap font-bold text-gray-90">
                   {message.content}
                 </p>
               </div>

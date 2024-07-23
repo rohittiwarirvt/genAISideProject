@@ -16,7 +16,7 @@ const UserMessageDisplay: React.FC<UserMessageDisplayProps> = ({message, showLoa
             {formatDisplayDate(message.created_at)}
           </div>
         </div>
-        <div className="mt-4 w-4/5 pr-3 font-nunito font-bold text-gray-90">
+        <div className="mt-4 w-4/5 pr-3  font-bold text-gray-90">
           {message.content}
         </div>
       </div>

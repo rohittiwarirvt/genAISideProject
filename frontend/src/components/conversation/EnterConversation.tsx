@@ -21,22 +21,22 @@ export const EnterConversation = () => {
     setIsLoadingConversation(true)
     event.preventDefault();
     const conversationID = await conversationClient.createConversation()
-
+    setIsLoadingConversation(false)
     router.push(`/conversation/${conversationID}`)
   }
   return(
     <div className="box-border flex h-full flex-col justify-start">
       <div className="relative">
 
-        <button onClick={handleAddConversation} disabled={isLoadingConversation}>
-          <div className="flex items-center justify-center">
+        <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700" onClick={handleAddConversation} disabled={isLoadingConversation}>
+          <div className="flex items-center justify-st">
                     {isLoadingConversation ? (
                       <div className="flex h-[22px] w-[180px] items-center justify-center">
                         <LoadingSpinner />
                       </div>
                     ) : (
                       <>
-                        start your conversation
+                        Start Troubleshooting
                         <div className="ml-2">
                           <AiOutlineArrowRight />
                         </div>
